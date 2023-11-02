@@ -1,0 +1,1 @@
+# search_api_solr_field_analysis
