@@ -1,0 +1,21 @@
+#analysis-result > div {
+  display: table;
+  border-spacing: 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  margin-bottom: 10px;
+}
+
+#analysis-result > div > div {
+  display: table-row;
+}
+
+#analysis-result span {
+  display: table-cell;
+  min-width: 80px;
+}
+
+#analysis-result > div > div:nth-child(n+3) span:nth-child(2) {
+  text-align: right;
+}

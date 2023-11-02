@@ -1,0 +1,15 @@
+<div>
+  <h2>{{ title }}</h2>
+  {% for class, texts in data %}
+    <div>
+      <span><b>{{ class }}</b> | </span>
+      {% for text in texts %}
+        {% if text.matches %}
+          <span style="background-color: green;">{{ text.text }} | </span>
+        {% else %}
+          <span>{{ text.text }} | </span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>

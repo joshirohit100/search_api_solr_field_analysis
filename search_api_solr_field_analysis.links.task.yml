@@ -1,0 +1,5 @@
+search_api_solr.field_analysis:
+  route_name: search_api_solr.field_analysis
+  base_route: entity.search_api_server.canonical
+  title: 'Field Analysis'
+  weight: 5

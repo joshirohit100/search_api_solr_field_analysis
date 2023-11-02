@@ -1,0 +1,86 @@
+<?php
+
+use Http\Factory\Guzzle\RequestFactory;
+use Http\Factory\Guzzle\StreamFactory;
+use Solarium\Client;
+use Solarium\Core\Client\Adapter\Psr18Adapter;
+use Solarium\Core\Query\QueryInterface as SolariumQueryInterface;
+use Drupal\search_api\Query\QueryInterface;
+use Solarium\Core\Client\Endpoint;
+
+function search_api_solr_field_analysis_theme($existing, $type, $theme, $path) {
+  return [
+    'index_analysis' => [
+      'variables' => [
+        'data' => [],
+        'title' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_search_api_solr_query_alter().
+ */
+function search_api_solr_field_analysis_search_api_solr_query_alter(SolariumQueryInterface $solarium_query, QueryInterface $query) {
+  /* @var \Drupal\search_api_solr\SolrConnector\SolrConnectorPluginManager $pp */
+//  $pp = \Drupal::service('plugin.manager.search_api_solr.connector');
+//  /* @var \Drupal\search_api_solr\Plugin\SolrConnector\StandardSolrCloudConnector $dd */
+//  $dd = $pp->createInstance('standard');
+//  $default_configuration = $dd->defaultConfiguration();
+//  $gg = array_merge($default_configuration, [
+//    'host' => 'testsite.ddev.site',
+//    'port' => '8983',
+//    'core' => 'dev',
+//    'collection' => 'dev',
+//  ]);
+//  $dd->setConfiguration($gg);
+//
+//  $ss = $dd->getConfiguration();
+//  $ss['key'] = 'search_api_solr';
+//
+//  $solr_client = new Client(
+//    new Psr18Adapter(
+//      \Drupal::service('http_client'),
+//      new RequestFactory(),
+//      new StreamFactory()
+//    ),
+//    \Drupal::service('event_dispatcher'),
+//    [
+//      'endpoint' => [
+//        'search_api_solr' => new Endpoint($ss),
+//      ],
+//    ],
+//  );
+//
+//  $field_analysis = $solr_client->createAnalysisField();
+//  $field_analysis->setFieldType('text_en');
+//  $field_analysis->setFieldValue('The quick brown fox jump over little lazy dog');
+//  $field_analysis->setQuery('fox');
+//  $results = $solr_client->analyze($field_analysis);
+//  $data = [];
+//  foreach ($results as $result) {
+//    $data[$result->getName()] = [];
+//    foreach ($result as $item) {
+//      $data[$result->getName()] = [
+//        'name' => $item->getName(),
+//        'indexAnalysis' => [],
+//      ];
+//
+//      $indexAnalysis = $item->getIndexAnalysis();
+//      $item->getQueryAnalysis();
+//      if (!empty($indexAnalysis)) {
+//        foreach ($indexAnalysis as $classes) {
+//          $data[$result->getName()]['indexAnalysis']['classes'][$classes->getName()] = [];
+//          foreach ($classes as $class) {
+//            $data[$result->getName()]['indexAnalysis']['classes'][$classes->getName()][] = [
+//              'text' => $class->getText(),
+//              'raw' => $class->getRawText(),
+//            ];
+//          }
+//        }
+//      }
+//    }
+//  }
+//  print_r($data);
+}

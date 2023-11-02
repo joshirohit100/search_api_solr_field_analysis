@@ -1,0 +1,7 @@
+name: 'Search Api Solr Field Analysis'
+description: 'Search Api Solr Field Analysis'
+package: 'Search'
+type: module
+core_version_requirement: ^10
+dependencies:
+  - search_api_solr:search_api_solr

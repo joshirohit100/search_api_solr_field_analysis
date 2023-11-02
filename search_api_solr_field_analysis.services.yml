@@ -1,0 +1,9 @@
+services:
+  solr_field_analysis.solr_client:
+    class: Drupal\search_api_solr_field_analysis\SolrClient
+
+  solr_field_analysis.request_factory:
+    class: Http\Factory\Guzzle\RequestFactory
+
+  solr_field_analysis.stream_factory:
+    class: Http\Factory\Guzzle\StreamFactory
