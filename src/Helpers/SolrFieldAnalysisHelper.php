@@ -2,34 +2,39 @@
 
 namespace Drupal\search_api_solr_field_analysis\Helpers;
 
-use Solarium\Client as SolariumClient;
-use Solarium\Core\Client\Adapter\Psr18Adapter;
 use Drupal\search_api\ServerInterface;
+use GuzzleHttp\Client;
 use Http\Factory\Guzzle\RequestFactory;
 use Http\Factory\Guzzle\StreamFactory;
-use GuzzleHttp\Client;
+use Solarium\Client as SolariumClient;
+use Solarium\Core\Client\Adapter\Psr18Adapter;
 use Solarium\Core\Query\Result\ResultInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * Class SolrFieldAnalysisHelper.
+ *
+ * Solr field analysis helper.
+ */
 class SolrFieldAnalysisHelper {
 
   /**
    * Search api server object.
    *
-   * @var \Drupal\search_api\ServerInterface|NULL
+   * @var \Drupal\search_api\ServerInterface|null
    */
-  protected $searchAapiServer = NULL;
+  protected $searchApiServer = NULL;
 
   /**
    * Constructor for SolrFieldAnalysisHelper.
    *
-   * @param RequestFactory $requestFactory
+   * @param \Http\Factory\Guzzle\RequestFactory $requestFactory
    *   Request factory.
-   * @param StreamFactory $streamFactory
+   * @param \Http\Factory\Guzzle\StreamFactory $streamFactory
    *   Stream factory.
-   * @param Client $httpClient
+   * @param \GuzzleHttp\Client $httpClient
    *   Guzzle http client.
-   * @param EventDispatcherInterface $eventDispatcher
+   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
    *   Event dispatcher.
    */
   public function __construct(
@@ -38,16 +43,13 @@ class SolrFieldAnalysisHelper {
     protected Client $httpClient,
     protected EventDispatcherInterface $eventDispatcher,
   ) {
-    $this->httpClient = $httpClient;
-    $this->eventDispatcher = $eventDispatcher;
-    $this->requestFactory = $requestFactory;
-    $this->streamFactory = $streamFactory;
   }
 
   /**
    * Get search api server object.
    *
-   * @return \Drupal\search_api\ServerInterface|NULL
+   * @return \Drupal\search_api\ServerInterface|null
+   *   Search server object.
    */
   public function getSearchApiServer() {
     return $this->searchAapiServer;
@@ -57,6 +59,7 @@ class SolrFieldAnalysisHelper {
    * Set search api server object.
    *
    * @param \Drupal\search_api\ServerInterface
+   *   Search server object.
    */
   public function setSearchApiServer(ServerInterface $search_api_server) {
     $this->searchAapiServer = $search_api_server;
@@ -64,10 +67,13 @@ class SolrFieldAnalysisHelper {
   }
 
   /**
-   * Get solariumn client object.
+   * Get solarium client object.
    *
    * @param ServerInterface $search_api_server
+   *   Search server object.
+   *
    * @return \Solarium\Client
+   *   Solarium client.
    */
   public function getSolariumClient(ServerInterface $search_api_server) {
     $backend = $search_api_server->getBackend();
@@ -99,7 +105,7 @@ class SolrFieldAnalysisHelper {
    * @param string|null $query_value
    *   Query string to analyse.
    *
-   * @return \Solarium\Core\Query\Result\ResultInterface;
+   * @return \Solarium\Core\Query\Result\ResultInterface
    *   Solarium query result.
    */
   public function getFieldAnalysis(string $field, string $index_value, ?string $query_value) {
@@ -120,7 +126,7 @@ class SolrFieldAnalysisHelper {
   /**
    * Prepare the query data result set for rendering.
    *
-   * @param \Solarium\Core\Query\Result\ResultInterface
+   * @param \Solarium\Core\Query\Result\ResultInterface $results
    *   Analyse query result.
    *
    * @return array
@@ -155,7 +161,7 @@ class SolrFieldAnalysisHelper {
   /**
    * Prepare the Index data result set for rendering.
    *
-   * @param \Solarium\Core\Query\Result\ResultInterface
+   * @param \Solarium\Core\Query\Result\ResultInterface $results
    *   Analyse query result.
    *
    * @return array

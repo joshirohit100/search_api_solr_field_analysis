@@ -7,8 +7,8 @@ use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\search_api\ServerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\search_api_solr_field_analysis\Helpers\SolrFieldAnalysisHelper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Form for solr field analysis.
@@ -118,7 +118,7 @@ class SolrFieldAnalysisForm extends FormBase {
    *   Form state object.
    *
    * @return \Drupal\Core\Ajax\AjaxResponse
-   *   Ajax response.
+   *   Ajax Response.
    */
   public function ajaxFieldAnalysis(array $form, FormStateInterface $form_state): AjaxResponse {
     $field = $form_state->getValue('analysis_field');
@@ -140,7 +140,7 @@ class SolrFieldAnalysisForm extends FormBase {
       ];
 
       if ($query_value) {
-        // Prepare query anaylsis rendering data.
+        // Prepare query analysis rendering data.
         $query_processed_data = $this->solrFieldAnalysisHelper->getQueryDataFromResult($results);
         $build[] = [
           '#theme' => 'index_analysis',
