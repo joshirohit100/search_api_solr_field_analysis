@@ -1,6 +1,7 @@
 services:
-  solr_field_analysis.solr_client:
-    class: Drupal\search_api_solr_field_analysis\SolrClient
+  solr_field_analysis.field_analysis_helper:
+    class:  Drupal\search_api_solr_field_analysis\Helpers\SolrFieldAnalysisHelper
+    arguments: ['@solr_field_analysis.request_factory', '@solr_field_analysis.stream_factory', '@http_client', '@event_dispatcher']
 
   solr_field_analysis.request_factory:
     class: Http\Factory\Guzzle\RequestFactory
