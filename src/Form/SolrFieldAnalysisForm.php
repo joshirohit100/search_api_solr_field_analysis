@@ -132,7 +132,7 @@ class SolrFieldAnalysisForm extends FormBase {
       $results = $this->solrFieldAnalysisHelper->getFieldAnalysis($field, $index_value, $query_value);
 
       // Prepare index analysis rendering data.
-      $index_processed_data = $this->solrFieldAnalysisHelper->getIndexDataFromResult($results);
+      $index_processed_data = $this->solrFieldAnalysisHelper->getIndexDataFromResult($results, 'index');
       $build[] = [
         '#theme' => 'index_analysis',
         '#title' => $this->t('Index Analysis'),
@@ -141,7 +141,7 @@ class SolrFieldAnalysisForm extends FormBase {
 
       if ($query_value) {
         // Prepare query analysis rendering data.
-        $query_processed_data = $this->solrFieldAnalysisHelper->getQueryDataFromResult($results);
+        $query_processed_data = $this->solrFieldAnalysisHelper->getIndexDataFromResult($results, 'query');
         $build[] = [
           '#theme' => 'index_analysis',
           '#title' => $this->t('Query Analysis'),

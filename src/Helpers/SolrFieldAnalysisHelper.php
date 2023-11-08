@@ -124,54 +124,27 @@ class SolrFieldAnalysisHelper {
   }
 
   /**
-   * Prepare the query data result set for rendering.
-   *
-   * @param \Solarium\Core\Query\Result\ResultInterface $results
-   *   Analyse query result.
-   *
-   * @return array
-   *   Array for rendering
-   */
-  public function getQueryDataFromResult(ResultInterface $results) {
-    $data = [];
-    foreach ($results as $result) {
-      foreach ($result as $item) {
-        $queryAnalysis = $item->getQueryAnalysis();
-        if (!empty($queryAnalysis)) {
-          foreach ($queryAnalysis as $classes) {
-            $class_name = $classes->getName();
-            $exploded_name = explode('.', $class_name);
-            $class_name = end($exploded_name);
-            $data[$class_name] = [];
-            foreach ($classes as $class) {
-              $data[$class_name][] = [
-                'text' => $class->getText(),
-                'raw_text' => $class->getRawText(),
-                'matches' => $class->getMatch(),
-              ];
-            }
-          }
-        }
-      }
-    }
-
-    return $data;
-  }
-
-  /**
    * Prepare the Index data result set for rendering.
    *
    * @param \Solarium\Core\Query\Result\ResultInterface $results
    *   Analyse query result.
+   * @param string $type
+   *   Type of analysis - 'index' or 'query'.
    *
    * @return array
    *   Array for rendering
    */
-  public function getIndexDataFromResult(ResultInterface $results) {
+  public function getIndexDataFromResult(ResultInterface $results, string $type) {
     $data = [];
     foreach ($results as $result) {
       foreach ($result as $item) {
-        $indexAnalysis = $item->getIndexAnalysis();
+        if ($type === 'query') {
+          $indexAnalysis = $item->getQueryAnalysis();
+        }
+        else {
+          $indexAnalysis = $item->getIndexAnalysis();
+        }
+
         if (!empty($indexAnalysis)) {
           foreach ($indexAnalysis as $classes) {
             $class_name = $classes->getName();
