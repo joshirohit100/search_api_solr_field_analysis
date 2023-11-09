@@ -4,6 +4,7 @@ namespace Drupal\search_api_solr_field_analysis\Form;
 
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\search_api\ServerInterface;
@@ -30,12 +31,21 @@ class SolrFieldAnalysisForm extends FormBase {
   protected $solrFieldAnalysisHelper;
 
   /**
+   * Entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
    * Constructor for SolrFieldAnalysisForm.
    */
   public function __construct(
     SolrFieldAnalysisHelper $solr_field_analysis_helper,
+    EntityTypeManagerInterface $entity_type_manager,
   ) {
     $this->solrFieldAnalysisHelper = $solr_field_analysis_helper;
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
@@ -44,6 +54,7 @@ class SolrFieldAnalysisForm extends FormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('solr_field_analysis.field_analysis_helper'),
+      $container->get('entity_type.manager'),
     );
   }
 
@@ -86,12 +97,19 @@ class SolrFieldAnalysisForm extends FormBase {
       '#title' => $this->t('Field query value'),
     ];
 
+    // Get solr field lists.
+    $list_builder = $this->entityTypeManager->getListBuilder('solr_field_type');
+    $list_builder->setServer($search_api_server);
+    $solr_field_types = $list_builder->load();
+
+    $solr_fields = [];
+    foreach ($solr_field_types as $solr_field_type) {
+      $solr_fields[$solr_field_type->getFieldTypeName()] = $solr_field_type->label();
+    }
+
     $form['analysis_field'] = [
       '#type' => 'select',
-      '#options' => [
-        '' => $this->t('Select field'),
-        'text_en' => $this->t('Text en'),
-      ],
+      '#options' => $solr_fields,
       '#required' => TRUE,
       '#title' => $this->t('Select Field'),
     ];
