@@ -1,0 +1,16 @@
+{
+    "name": "drupal/search_api_solr_field_analysis",
+    "description": "Provides field analysis for the given field.",
+    "type": "drupal-module",
+    "homepage": "https://github.com/joshirohit100/search_api_solr_field_analysis",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Rohit Joshi",
+            "homepage": "https://www.drupal.org/u/joshirohit100"
+        }
+    ],
+    "require": {
+        "drupal/search_api_solr": "^4.3"
+    }
+}
