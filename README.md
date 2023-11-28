@@ -1,4 +1,8 @@
-# Search Api Aolr Field Analysis
+# This repo is archived as this is now merged in search_api_solr in search_api_solr_admin module <link>https://www.drupal.org/project/search_api_solr/issues/3402991</link>
+
+<hr>
+
+## Search Api Aolr Field Analysis
 
 This module is not intended to enable on production
 but is more like the development module to review
